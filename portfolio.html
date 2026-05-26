@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rohit Rakshan Palanikumar — Aerospace Engineer</title>
+  <meta name="description" content="Aerospace Engineering Portfolio" />
+  <meta property="og:title" content="Rohit Rakshan Palanikumar — Aerospace Engineer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:          #F2F0EF;
+      --bg2:         #f4f6f9;
+      --surface:     #ffffff;
+      --border:      rgba(0, 120, 200, 0.18);
+      --accent:      #305CDE;
+      --accent2:     #00a884;
+      --accent3:     #e05a20;
+      --text:        #1a2535;
+      --text-dim:    #4a6080;
+      --text-muted:  #9ab0c8;
+      --glow:        0 2px 16px rgba(0,112,204,0.18);
+      --glow2:       0 4px 32px rgba(0,112,204,0.10);
+      --font-display: 'Inter', 'Exo 2', sans-serif;
+      --font-mono:    'Space Mono', monospace;
+      --font-body:    'Inter', 'Exo 2', sans-serif;
+      --nav-h:        64px;
+      --bar-h:        36px;
+      --section-gap: 120px;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) #e8eef4;
+    }
+    html::-webkit-scrollbar { width: 4px; }
+    html::-webkit-scrollbar-track { background: #e8eef4; }
+    html::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    html::-webkit-scrollbar-thumb:hover { background: #005aa8; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    #cursor {
+      position: fixed; top: 0; left: 0; z-index: 9999;
+      width: 10px; height: 10px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; transform: translate(-50%,-50%);
+      transition: width .15s, height .15s;
+      box-shadow: 0 0 8px rgba(0,112,204,0.5);
+    }
+    #cursor-ring {
+      position: fixed; top: 0; left: 0; z-index: 9998;
+      width: 34px; height: 34px;
+      border: 1.5px solid rgba(0,112,204,0.4); border-radius: 50%;
+      pointer-events: none; transform: translate(-50%,-50%);
+      transition: width .3s, height .3s;
+    }
+    body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 18px; height: 18px; }
+    body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width: 50px; height: 50px; }
+
+
+
+    /* ── NOISE OVERLAY — subtle on white ── */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.018'/%3E%3C/svg%3E");
+      pointer-events: none; opacity: .4;
+    }
+
+    /* ── SITE WRAP ── */
+    .site-wrap { position: relative; z-index: 2; }
+
+    /* ════════════════════════════════════
+       F-16 SCROLL PROGRESS BAR
+       Sits between nav (top:64px) and page content
+       Height: 36px, always visible, fixed
+    ════════════════════════════════════ */
+    #f16-bar {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      height: var(--bar-h);
+      z-index: 99;
+      background: rgba(248,251,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,112,204,0.12);
+      overflow: visible;
+    }
+
+    /* The track line */
+    #f16-track {
+      position: absolute;
+      top: 50%; left: 48px; right: 48px;
+      transform: translateY(-50%);
+      height: 1px;
+      background: linear-gradient(to right,
+        rgba(0,112,204,0.08),
+        rgba(0,112,204,0.28),
+        rgba(0,112,204,0.08));
+    }
+
+    /* Completed (glowing) portion of track */
+    #f16-trail {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, rgba(0,112,204,0.7), rgba(0,168,132,0.5));
+      box-shadow: 0 0 6px rgba(0,112,204,0.4);
+      transition: width 0.05s linear;
+    }
+
+    /* Start/end tick marks */
+    #f16-track::before,
+    #f16-track::after {
+      content: '';
+      position: absolute; top: -4px;
+      width: 1px; height: 8px;
+      background: var(--accent);
+      opacity: 0.4;
+    }
+    #f16-track::before { left: 0; }
+    #f16-track::after  { right: 0; }
+
+    /* Percentage readout */
+    #f16-pct {
+      position: absolute;
+      right: 10px; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-mono);
+      font-size: .58rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      opacity: 0.6;
+      min-width: 36px;
+      text-align: right;
+    }
+
+    /* The F-16 SVG icon — slides along the track */
+    #f16-jet {
+      position: absolute;
+      top: 50%;
+      left: 48px;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      pointer-events: none;
+      filter:
+        drop-shadow(0 0 4px rgba(0,112,204,0.7))
+        drop-shadow(0 0 10px rgba(0,168,132,0.3));
+      transition: left 0.05s linear;
+      will-change: left;
+    }
+
+    /* afterburner pulse on the jet */
+    #f16-jet .burner {
+      animation: burnerPulse 0.4s ease-in-out infinite alternate;
+      transform-origin: 20% 50%;
+    }
+    @keyframes burnerPulse {
+      from { opacity: 0.6; transform: scaleX(0.7); }
+      to   { opacity: 1.0; transform: scaleX(1.15); }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: var(--nav-h);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,112,204,0.1);
+      box-shadow: 0 1px 20px rgba(0,80,160,0.06);
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-size: .85rem; font-weight: 800;
+      color: var(--accent); letter-spacing: .12em; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-body); font-size: .8rem; font-weight: 500;
+      color: var(--text-dim); text-decoration: none;
+      letter-spacing: .04em; text-transform: uppercase; position: relative;
+      transition: color .25s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--accent);
+      transition: width .3s; border-radius: 1px;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-resume {
+      font-family: var(--font-body); font-size: .75rem; font-weight: 600;
+      padding: 8px 18px; border: 1.5px solid var(--accent);
+      color: var(--accent); text-decoration: none;
+      letter-spacing: .06em; text-transform: uppercase; border-radius: 3px;
+      transition: background .25s, box-shadow .25s, color .25s;
+    }
+    .nav-resume:hover { background: var(--accent); color: #fff; box-shadow: var(--glow); }
+
+    /* ── HERO ── */
+    /* Push content below nav + f16 bar */
+    #home {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      padding: calc(var(--nav-h) + var(--bar-h) + 20px) 8% 0;
+      position: relative;
+    }
+    .hero-tag {
+      font-family: var(--font-mono); font-size: .72rem; color: var(--accent);
+      letter-spacing: .3em; text-transform: uppercase; margin-bottom: 1.2rem;
+      opacity: 0; animation: fadeUp .8s .3s forwards;
+    }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7vw, 4.5rem); font-weight: 900;
+      line-height: 1.0; letter-spacing: .04em; text-transform: uppercase;
+      color: var(--text);
+      opacity: 0; animation: fadeUp .8s .5s forwards;
+    }
+    .hero-name span { color: var(--accent); display: block; }
+    .hero-sub {
+      font-family: var(--font-mono); font-size: clamp(.85rem, 1.5vw, 1.1rem);
+      color: var(--text-dim); margin-top: 1.2rem; letter-spacing: .08em;
+      max-width: 580px; opacity: 0; animation: fadeUp .8s .7s forwards;
+    }
+    .hero-sub .typed-cursor { color: var(--accent); animation: blink 1s infinite; }
+    .hero-cta { display: flex; gap: 1rem; margin-top: 2.5rem; opacity: 0; animation: fadeUp .8s .9s forwards; }
+    .btn-primary {
+      font-family: var(--font-mono); font-size: .75rem; padding: 14px 32px;
+      background: var(--accent); color: #000; font-weight: 700;
+      text-decoration: none; letter-spacing: .12em; text-transform: uppercase;
+      transition: box-shadow .25s, transform .2s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+    .btn-primary:hover { box-shadow: 0 0 30px rgba(0,170,255,.6); transform: translateY(-2px); }
+    .btn-outline {
+      font-family: var(--font-mono); font-size: .75rem; padding: 14px 32px;
+      border: 1px solid var(--border); color: var(--text-dim); text-decoration: none;
+      letter-spacing: .12em; text-transform: uppercase;
+      transition: border-color .25s, color .25s, box-shadow .25s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--glow); }
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0; animation: fadeUp .8s 1.2s forwards;
+    }
+    .hero-scroll span { font-family: var(--font-mono); font-size: .6rem; color: var(--text-muted); letter-spacing: .2em; text-transform: uppercase; }
+    .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollPulse 2s infinite; }
+
+    /* ── ALL SECTIONS ── */
+    section { padding: var(--section-gap) 8%; position: relative; }
+    /* Offset for fixed nav+bar */
+    section:not(#home) { padding-top: calc(var(--nav-h) + var(--bar-h) + 40px); }
+
+    .section-label {
+      font-family: var(--font-mono); font-size: .68rem; color: var(--accent);
+      letter-spacing: .35em; text-transform: uppercase; margin-bottom: .5rem;
+      display: flex; align-items: center; gap: .8rem;
+    }
+    .section-label::before { content: ''; display: inline-block; width: 40px; height: 1px; background: var(--accent); box-shadow: var(--glow); }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text); margin-bottom: 3rem; }
+    .section-title em { font-style: normal; color: var(--accent); }
+    .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); opacity: .2; margin: 0 0 var(--section-gap); }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-photo-wrap { display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%; }
+	/*
+    .about-photo-frame { position: relative; width: 100%; max-width: 380px; }
+    .about-photo-frame::before { content: ''; position: absolute; top: -12px; left: -12px; right: 12px; bottom: 12px; border: 1px solid var(--accent); opacity: .4; pointer-events: none; }
+    .about-photo-frame::after { content: ''; position: absolute; top: 12px; left: 12px; right: -12px; bottom: -12px; border: 1px solid var(--accent2); opacity: .2; pointer-events: none; }
+	*/
+    .about-photo { width: 75%; display: block; filter: grayscale(20%) contrast(1.1); transition: filter .4s; }
+    .about-photo:hover { filter: grayscale(0%) contrast(1.15); }
+    .about-photo-placeholder {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--bg2) 0%, rgba(0,100,200,.2) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; border: 1px solid var(--border);
+      color: var(--text-dim); font-family: var(--font-mono); font-size: .75rem; letter-spacing: .1em;
+    }
+    .about-photo-placeholder svg { width: 48px; height: 48px; opacity: .3; }
+    .about-text p { color: var(--text); margin-bottom: 1.2rem; font-size: 1.02rem; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .stat-box {
+      border: 1px solid var(--border); padding: 1.2rem;
+      background: var(--surface); backdrop-filter: blur(10px);
+      text-align: center; position: relative; overflow: hidden;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .stat-box:hover { border-color: var(--accent); box-shadow: var(--glow2); }
+    .stat-box::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,170,255,.05) 0%, transparent 60%); }
+    .stat-num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: var(--accent); display: block; }
+    .stat-label { font-family: var(--font-mono); font-size: .62rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .15em; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .skill-category {
+      border: 1px solid var(--border); background: var(--surface);
+      backdrop-filter: blur(12px); padding: 1.8rem;
+      position: relative; overflow: hidden;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+    }
+    .skill-category:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--glow2), 0 20px 40px rgba(0,0,0,.4); }
+    .skill-category::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--accent), var(--accent2)); opacity: 0; transition: opacity .3s; }
+    .skill-category:hover::before { opacity: 1; }
+    .skill-cat-icon { font-size: 2rem; margin-bottom: .8rem; display: block; }
+    .skill-cat-name { font-family: var(--font-display); font-size: .78rem; font-weight: 700; color: var(--accent); letter-spacing: .18em; text-transform: uppercase; margin-bottom: 1rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .skill-tag {
+      font-family: var(--font-mono); font-size: .66rem; padding: 4px 10px;
+      background: rgba(0,170,255,.08); border: 1px solid rgba(0,170,255,.2);
+      color: var(--text-dim); letter-spacing: .06em;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .skill-tag:hover { background: rgba(0,170,255,.18); color: var(--accent); border-color: var(--accent); }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; top: 0; left: 7px; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent), rgba(0,170,255,.1)); }
+    .timeline-item { position: relative; margin-bottom: 3rem; opacity: 0; transform: translateX(-20px); transition: opacity .6s, transform .6s; }
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+    .timeline-dot { position: absolute; left: -2rem; top: 6px; width: 14px; height: 14px; border: 2px solid var(--accent); background: var(--bg); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 12px rgba(0,170,255,.5); }
+    .timeline-date { font-family: var(--font-mono); font-size: .68rem; color: var(--accent); letter-spacing: .15em; margin-bottom: .4rem; }
+    .timeline-role { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--text); letter-spacing: .06em; margin-bottom: .2rem; }
+    .timeline-company { font-family: var(--font-mono); font-size: .78rem; color: var(--text-dim); margin-bottom: .8rem; }
+    .timeline-body { border: 1px solid var(--border); background: var(--surface); backdrop-filter: blur(10px); padding: 1.5rem; position: relative; }
+    .timeline-body::before { content: ''; position: absolute; top: 8px; left: -8px; width: 16px; height: 1px; background: var(--accent); }
+    .timeline-body ul { padding-left: 1.2rem; }
+    .timeline-body li { color: var(--text); margin-bottom: .4rem; font-size: .95rem; }
+    .timeline-body li::marker { color: var(--accent); }
+
+    /* ════════════════════════════════════
+       PROJECT CARDS — compact tile + modal
+    ════════════════════════════════════ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    /* Compact tile */
+    .project-card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      position: relative;
+      cursor: pointer;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      overflow: hidden;
+      height: 180px; /* compact height */
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: var(--glow2), 0 20px 40px rgba(0,0,0,.5);
+    }
+
+    /* Background emoji/icon area */
+    .project-tile-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, var(--bg2) 0%, rgba(0,80,160,.25) 60%, rgba(0,180,120,.08) 100%);
+      transition: opacity .3s;
+    }
+	
+    .project-tile-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0.85;
+      transition: opacity .3s;
+    }
+
+    .project-card:hover .project-tile-bg img{ opacity: 1; }
+
+    /* Bottom info strip */
+    .project-tile-info {
+      position: relative; z-index: 1;
+      background: linear-gradient(to top, rgba(2,4,8,0.95), transparent);
+      padding: .8rem 1rem .9rem;
+    }
+    .project-tile-title {
+      font-family: var(--font-display); font-size: .78rem; font-weight: 700;
+      color: #fff; letter-spacing: .06em; margin-bottom: .35rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .project-tile-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+    .project-tile-tag {
+      font-family: var(--font-mono); font-size: .55rem; padding: 2px 7px;
+      background: rgba(0,255,204,.08); border: 1px solid rgba(0,255,204,.22);
+      color: var(--accent2); letter-spacing: .04em;
+    }
+    .project-tile-hint {
+      position: absolute; top: .6rem; right: .7rem; z-index: 2;
+      font-family: var(--font-mono); font-size: .55rem;
+      color: var(--text-muted); letter-spacing: .1em;
+      opacity: 0; transition: opacity .3s;
+    }
+    .project-card:hover .project-tile-hint { opacity: 1; }
+    .featured-badge {
+      position: absolute; top: .7rem; left: .7rem; z-index: 2;
+      font-family: var(--font-mono); font-size: .55rem; padding: 3px 8px;
+      background: rgba(255,107,53,.15); border: 1px solid rgba(255,107,53,.4);
+      color: var(--accent3); letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════════
+       PROJECT MODAL
+    ════════════════════════════════════ */
+    #project-modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background:rgba(0,0,0,0.7);
+      backdrop-filter: blur(16px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    #project-modal-overlay.open {
+      opacity: 1; pointer-events: all;
+    }
+
+    #project-modal {
+      width: 100%; max-width: 780px;
+      max-height: 88vh; overflow-y: auto;
+      background: #ffffff;
+      border: 1px solid var(--accent);
+      box-shadow: var(--glow2), 0 40px 80px rgba(0,0,0,.7);
+      position: relative;
+      transform: scale(0.92) translateY(20px);
+      transition: transform .35s cubic-bezier(.22,1,.36,1);
+      scrollbar-width: thin; scrollbar-color: var(--accent) transparent;
+    }
+    #project-modal-overlay.open #project-modal {
+      transform: scale(1) translateY(0);
+    }
+
+    /* Top accent bar */
+    #project-modal::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--accent2), var(--accent3));
+    }
+
+    .modal-close {
+      position: sticky; top: 0; left: 0; right: 0;
+      display: flex; justify-content: flex-end;
+      padding: .8rem 1rem .4rem;
+      background: rgba(6,15,30,0.95);
+      z-index: 10;
+    }
+    .modal-close-btn {
+      font-family: var(--font-mono); font-size: .7rem;
+      color: var(--text-dim); background: none;
+      border: 1px solid rgba(0,170,255,.2); padding: 5px 14px;
+      cursor: pointer; letter-spacing: .15em; text-transform: uppercase;
+      transition: color .2s, border-color .2s, box-shadow .2s;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .modal-close-btn:hover { color: var(--accent); border-color: var(--accent); box-shadow: var(--glow); }
+    .modal-close-btn svg { width: 12px; height: 12px; }
+
+    .modal-hero {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: linear-gradient(135deg, var(--bg2) 0%, rgba(0,60,140,.4) 50%, rgba(0,160,100,.12) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* scanline effect on modal hero */
+    .modal-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,0,0,.08) 3px, rgba(0,0,0,.08) 4px);
+      pointer-events: none;
+    }
+
+    .modal-body { padding: 1.8rem 2rem 2rem; }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+    .modal-tag {
+      font-family: var(--font-mono); font-size: .62rem; padding: 3px 10px;
+      background: rgba(0,255,204,.08); border: 1px solid rgba(0,255,204,.25);
+      color: var(--accent2); letter-spacing: .06em;
+    }
+    .modal-title {
+      font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 700; color: #fff; letter-spacing: .06em; margin-bottom: 1rem;
+    }
+    .modal-desc { color: var(--text); font-size: .95rem; line-height: 1.8; margin-bottom: 1.4rem; }
+    .modal-details-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .modal-detail-box {
+      border: 1px solid var(--border); padding: 1rem;
+      background: rgba(0,170,255,.04);
+    }
+    .modal-detail-label {
+      font-family: var(--font-mono); font-size: .6rem;
+      color: var(--accent); letter-spacing: .18em; text-transform: uppercase;
+      margin-bottom: .3rem; display: block;
+    }
+    .modal-detail-val { color: var(--text); font-size: .88rem; }
+    .modal-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .modal-link {
+      font-family: var(--font-mono); font-size: .72rem; padding: 10px 22px;
+      color: var(--accent); border: 1px solid var(--accent); text-decoration: none;
+      letter-spacing: .1em; text-transform: uppercase;
+      display: flex; align-items: center; gap: .5rem;
+      transition: background .2s, box-shadow .2s;
+    }
+    .modal-link:hover { background: rgba(0,170,255,.1); box-shadow: var(--glow); }
+    .modal-link svg { width: 14px; height: 14px; }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-info h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; letter-spacing: .06em; }
+    .contact-info p { color: var(--text-dim); margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: .8rem; }
+    .contact-link-item { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text-dim); font-family: var(--font-mono); font-size: .8rem; padding: .8rem 1rem; border: 1px solid var(--border); background: var(--surface); transition: border-color .25s, color .25s, box-shadow .25s; }
+    .contact-link-item:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--glow2); }
+    .contact-link-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: .4rem; }
+    .form-label { font-family: var(--font-mono); font-size: .65rem; color: var(--accent); letter-spacing: .15em; text-transform: uppercase; }
+    .form-input { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: .85rem 1rem; font-family: var(--font-body); font-size: .9rem; outline: none; transition: border-color .25s, box-shadow .25s; }
+    .form-input:focus { border-color: var(--accent); box-shadow: var(--glow2); }
+    .form-input::placeholder { color: var(--text-muted); }
+    textarea.form-input { min-height: 130px; resize: vertical; }
+    .btn-submit { font-family: var(--font-mono); font-size: .75rem; padding: 14px 32px; background: transparent; border: 1px solid var(--accent); color: var(--accent); letter-spacing: .15em; text-transform: uppercase; cursor: pointer; transition: background .25s, box-shadow .25s, transform .2s; align-self: flex-start; }
+    .btn-submit:hover { background: rgba(0,170,255,.1); box-shadow: var(--glow); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 2rem 8%; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: .66rem; color: var(--text-muted); letter-spacing: .1em; }
+    footer span b { color: var(--accent); font-weight: 400; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes scrollPulse { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── GLITCH ── */
+    .glitch { position: relative; }
+    .glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; font-family: var(--font-display); font-weight: 900; font-size: inherit; letter-spacing: inherit; text-transform: inherit; }
+    .glitch::before { color: var(--accent2); clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%); left: 2px; animation: glitch1 4s infinite; }
+    .glitch::after { color: var(--accent3); clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); left: -2px; animation: glitch2 4s 1s infinite; }
+    @keyframes glitch1 { 0%,94%,100%{opacity:0;transform:translate(0)} 95%{opacity:.7;transform:translate(-3px,1px)} 97%{opacity:.5;transform:translate(3px,-1px)} }
+    @keyframes glitch2 { 0%,91%,100%{opacity:0;transform:translate(0)} 92%{opacity:.6;transform:translate(4px,2px)} 94%{opacity:.4;transform:translate(-2px,-1px)} }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .nav-links { display: none; }
+      .about-stats { grid-template-columns: repeat(2,1fr); }
+      .modal-details-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      :root { --section-gap: 70px; }
+      nav { padding: 0 5%; }
+      section { padding: var(--section-gap) 5%; }
+      footer { flex-direction: column; gap: .8rem; text-align: center; }
+      #project-modal-overlay { padding: .8rem; }
+      .modal-body { padding: 1.2rem 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+<!-- ════════ F-16 SCROLL PROGRESS BAR ════════ -->
+  <div id="f16-bar">
+    <div id="f16-track">
+      <div id="f16-trail"></div>
+    </div>
+    <!-- F-16 Wireframe SVG (top-down view, facing right) -->
+    <svg id="f16-jet" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Afterburner flame -->
+      <g class="burner">
+        <polygon points="18,37 8,33 4,40 8,47 18,43" fill="rgba(255,120,30,0.85)" />
+        <polygon points="18,38 10,36 6,40 10,44 18,42" fill="rgba(255,200,50,0.7)" />
+      </g>
+      <!-- Main fuselage -->
+      <path d="M22,40 L30,35 L55,31 L88,36 L105,40 L88,44 L55,49 L30,45 Z"
+        fill="rgba(0,170,255,0.08)" stroke="#00aaff" stroke-width="1.1"/>
+      <!-- Nose cone taper -->
+      <path d="M88,40 L100,40 L108,40" stroke="#00aaff" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M100,40 L115,40" stroke="#00ffcc" stroke-width="0.8" stroke-linecap="round" opacity="0.7"/>
+      <!-- Cockpit canopy -->
+      <ellipse cx="82" cy="40" rx="8" ry="4.5" fill="rgba(0,255,204,0.12)" stroke="#00ffcc" stroke-width="0.8"/>
+      <!-- Main delta wings -->
+      <path d="M60,36 L42,18 L38,20 L52,38" fill="rgba(0,170,255,0.1)" stroke="#00aaff" stroke-width="1"/>
+      <path d="M60,44 L42,62 L38,60 L52,42" fill="rgba(0,170,255,0.1)" stroke="#00aaff" stroke-width="1"/>
+      <!-- Wing leading edge strakes -->
+      <path d="M70,36 L58,24 L55,26 L65,38" fill="rgba(0,200,255,0.07)" stroke="#00aaff" stroke-width="0.7" opacity="0.8"/>
+      <path d="M70,44 L58,56 L55,54 L65,42" fill="rgba(0,200,255,0.07)" stroke="#00aaff" stroke-width="0.7" opacity="0.8"/>
+      <!-- Horizontal stabilizers -->
+      <path d="M35,37 L24,28 L22,30 L30,38" fill="rgba(0,170,255,0.09)" stroke="#00aaff" stroke-width="0.8"/>
+      <path d="M35,43 L24,52 L22,50 L30,42" fill="rgba(0,170,255,0.09)" stroke="#00aaff" stroke-width="0.8"/>
+      <!-- Vertical stabilizer (single, seen from top as fin outline) -->
+      <path d="M30,40 L22,33 L21,40 L22,47 Z" fill="rgba(0,255,204,0.08)" stroke="#00ffcc" stroke-width="0.7"/>
+      <!-- Air intake (below fuselage) -->
+      <path d="M72,40 L66,44 L60,45 L55,44" stroke="#00aaff" stroke-width="0.7" opacity="0.6" fill="none"/>
+      <!-- Panel lines / detail -->
+      <line x1="70" y1="38" x2="90" y2="39" stroke="#00aaff" stroke-width="0.4" opacity="0.5"/>
+      <line x1="70" y1="42" x2="90" y2="41" stroke="#00aaff" stroke-width="0.4" opacity="0.5"/>
+      <line x1="50" y1="37" x2="65" y2="36" stroke="#00aaff" stroke-width="0.35" opacity="0.4"/>
+      <line x1="50" y1="43" x2="65" y2="44" stroke="#00aaff" stroke-width="0.35" opacity="0.4"/>
+      <!-- Wingtip details -->
+      <circle cx="42" cy="18" r="1.2" fill="#00aaff" opacity="0.7"/>
+      <circle cx="42" cy="62" r="1.2" fill="#00aaff" opacity="0.7"/>
+      <!-- Nose glow dot -->
+      <circle cx="115" cy="40" r="1.5" fill="#00ffcc" opacity="0.9"/>
+    </svg>
+    <div id="f16-pct">0%</div>
+  </div>
+
+  <!-- ════════ PROJECT MODAL ════════ -->
+  <div id="project-modal-overlay" role="dialog" aria-modal="true" aria-label="Project Details">
+    <div id="project-modal">
+      <div class="modal-close">
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+          ESC / CLOSE
+        </button>
+      </div>
+      <div class="modal-hero" id="modal-hero">🛩️</div>
+      <div class="modal-body">
+        <div class="modal-tags" id="modal-tags"></div>
+        <div class="modal-title" id="modal-title"></div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-details-grid" id="modal-details"></div>
+        <div class="modal-links" id="modal-links"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-wrap">
+
+    <!-- ── NAV ── -->
+    <nav>
+      <a class="nav-logo" href="#home">AE / PORTFOLIO</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a class="nav-resume" href="assets/Rohit Resume One Pager.pdf" target="_blank">Resume ↗</a>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section id="home">
+      <div class="hero-tag">Aerospace Engineering Portfolio</div>
+      <h1 class="hero-name" data-text="Rohit Rakshan Palanikumar">
+        Rohit Rakshan Palanikumar
+        <span>AEROSPACE ENG.</span>
+      </h1>
+      <p class="hero-sub">
+        <span id="typed-text"></span><span class="typed-cursor">|</span>
+      </p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#projects">View Projects</a>
+        <a class="btn-outline" href="#contact">Get In Touch</a>
+      </div>
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ── ABOUT ── -->
+    <section id="about">
+      <div class="divider"></div>
+      <div class="section-label">01 / About</div>
+      <h2 class="section-title">Mission <em>Brief</em></h2>
+      <div class="about-grid">
+        <div class="about-photo-wrap fade-in" style="display:flex; align-items:center; height:100%;">
+          
+            <div class="about-photo-frame">
+          <img src="assets/About_Me.JPG" alt="Your Name" class="about-photo">
+       	    
+          </div>
+        </div>
+        <div class="about-text fade-in">
+          <p>I am an aerospace engineering student driven by a passion for solving complex engineering problems through a combination of analytical thinking and hands-on development. I enjoy working on multidisciplinary systems that bring together mechanics, aerodynamics, structures, controls, and manufacturing, and I am especially motivated by environments where engineering ideas quickly become physical hardware. My interests extend across aerospace and advanced mechanical systems, with a strong focus on building high-performance technologies that operate in demanding real-world conditions.</p>
+<p>
+My experience includes propulsion system modeling, CFD research, aerodynamic design, aerospace structures, and large-scale hardware integration through internships, research laboratories, and engineering organizations. I have developed propulsion analysis tools, performed turbulent flow simulations on supercomputing clusters, designed aerodynamic and structural components in CAD, conducted FEA and CFD analyses, and supported manufacturing and integration workflows for complex mechanical systems. Through organizations such as Texas Spacecraft Laboratory and Longhorn Racing Electric, as well as internships at The Boring Company and Flamefront Propulsion, I have gained experience working across the full engineering process from concept development and simulation to fabrication, testing, and validation.</p>
+<p>
+In future opportunities, I am looking to contribute to teams developing innovative, high-performance systems in aerospace, mechanical, or advanced technology industries. I am particularly interested in roles that combine technical analysis with hands-on engineering, rapid design iteration, and real-world system integration. My goal is to continue developing as an engineer by working on challenging projects that push the boundaries of performance, reliability, and manufacturability while collaborating with highly driven engineering teams. </p>
+          <div class="about-stats">
+            <div class="stat-box"><span class="stat-num">3.9</span><span class="stat-label">GPA</span></div>
+            <div class="stat-box"><span class="stat-num">5+</span><span class="stat-label">Projects</span></div>
+            <div class="stat-box"><span class="stat-num">2</span><span class="stat-label">Internships</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SKILLS ── -->
+    <section id="skills">
+      <div class="divider"></div>
+      <div class="section-label">02 / Capabilities</div>
+      <h2 class="section-title">Technical <em>Arsenal</em></h2>
+      <div class="skills-grid">
+        <div class="skill-category fade-in">
+          <span class="skill-cat-icon">🚀</span>
+          <div class="skill-cat-name">Aerodynamics & Propulsion</div>
+          <div class="skill-tags"><span class="skill-tag">ANSYS Fluent</span><span class="skill-tag">OpenFOAM</span><span class="skill-tag">OpenRocket</span><span class="skill-tag">CADENCE CFD</span><span class="skill-tag">PyFluent</span></div>
+        </div>
+        <div class="skill-category fade-in">
+          <span class="skill-cat-icon">👷‍♂️</span>
+          <div class="skill-cat-name">Structures</div>
+          <div class="skill-tags"><span class="skill-tag">Mechanical Assembly</span><span class="skill-tag">FEA</span><span class="skill-tag">Composites Manufacturing</span><span class="skill-tag">Machine Shop</span></div>
+        </div>
+        <div class="skill-category fade-in">
+          <span class="skill-cat-icon">🛠️</span>
+          <div class="skill-cat-name">CAD & Design</div>
+          <div class="skill-tags"><span class="skill-tag">SolidWorks</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">CATIA V5</span><span class="skill-tag">GD&T</span><span class="skill-tag">3D Printing</span><span class="skill-tag">Parametric Modeling</span></div>
+        </div>
+        <div class="skill-category fade-in">
+          <span class="skill-cat-icon">💻</span>
+          <div class="skill-cat-name">Programming & Tools</div>
+          <div class="skill-tags"><span class="skill-tag">MATLAB</span><span class="skill-tag">Python</span><span class="skill-tag">NumPy</span><span class="skill-tag">C++</span><span class="skill-tag">LaTeX</span><span class="skill-tag">ML</span><span class="skill-tag">Java</span><span class="skill-tag">HTML</span><span class="skill-tag">ParaView</span></div>
+        </div>
+	<!--
+        <div class="skill-category fade-in">
+          <span class="skill-cat-icon">📡</span>
+          <div class="skill-cat-name">Flight & Navigation</div>
+          <div class="skill-tags"><span class="skill-tag">Orbital Mechanics</span><span class="skill-tag">Guidance Systems</span><span class="skill-tag">STK</span><span class="skill-tag">MATLAB Simulink</span><span class="skill-tag">Control Theory</span></div>
+        </div>
+        <div class="skill-category fade-in">
+          <span class="skill-cat-icon">🔬</span>
+          <div class="skill-cat-name">Lab & Testing</div>
+          <div class="skill-tags"><span class="skill-tag">Wind Tunnel Testing</span><span class="skill-tag">Data Acquisition</span><span class="skill-tag">Strain Gauges</span><span class="skill-tag">Pressure Taps</span><span class="skill-tag">Technical Writing</span></div>
+        </div>
+	--!>
+      </div>
+    </section>
+
+    <!-- ── EXPERIENCE ── -->
+    <section id="experience">
+      <div class="divider"></div>
+      <div class="section-label">03 / Experience</div>
+      <h2 class="section-title">Flight <em>Log</em></h2>
+      <div class="timeline">
+	<div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Sep 2025 — Dec 2025</div>
+          <div class="timeline-role">The Boring Company</div>
+          <div class="timeline-company">Integration Engineering Intern</div>
+          <div class="timeline-body">
+            <ul>
+              <li>Supported assembly and integration of 3+ Prufrock TBMs across multi-disciplinary builds </li>
+              <li>Managed MBOMs across 5 active projects with 500+ parts; corrected design errors to reduce integration rework</li>
+              <li>Procured components and tracked inventory to sustain uninterrupted concurrent TBM assembly</li>
+	      <li>Partnered with production techs and test engineers to build and validate mechanical assemblies hands-on </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">June 2025 — Aug 2025</div>
+          <div class="timeline-role">Flamefront Propulsion</div>
+          <div class="timeline-company">Aerospace Engineering Intern</div>
+          <div class="timeline-body">
+            <ul>
+              <li>Built turbojet engine modeling tool in Python from scratch using GitHub libraries, ingesting Mach, altitude, and geometry 
+inputs to output thrust, SFC, and required propulsion performance metrics across the flight envelope</li>
+              <li>Implemented component selection logic with mechanical and thermodynamic constraints; achieved 6% thrust increase</li>
+              <li>Benchmarked model against experimental data, validating key performance parameters within 10% accuracy</li>
+	      <li>Designed engine geometry in CAD from component analysis outputs, closing analysis-to-hardware loop</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Oct 2024 — Aug 2025</div>
+          <div class="timeline-role">Computational Fluid Physics Lab</div>
+          <div class="timeline-company">Undergraduate Research Assistant</div>
+          <div class="timeline-body">
+            <ul>
+              <li>Investigated programmable microjet flow control in turbulent boundary layers to extend attached flow over NACA 4412 </li>
+              <li>Ran high-fidelity CFD cases on TACC supercomputer using Nek5000; validated Cl/Cd against XFOIL achieving 93% 
+prediction match via span increase </li>
+              <li>Microjet made a 42% decrease in separation volume for fast LSMs; indicating aerodynamic performance improvement</li>
+	      <li>Generated structured meshes in GridPro and GMSH with constrained boundary layer tolerances; analyzed in ParaView</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Aug 2023 — Present</div>
+          <div class="timeline-role">University of Texas at Austin</div>
+          <div class="timeline-company">B.S. Aerospace Engineering — GPA: 3.93 / 4.0</div>
+          <div class="timeline-body">
+            <ul>
+              <li>Relevant coursework: Rocket Science, Feedback Control Systems, Spacecraft 
+Dynamics, Electromechanical Systems Lab, Computational Methods for Structural Analysis</li>
+	      <li>Engineering Honors and Computational Engineering and Science Certificate</li>
+              <li>AIAA, Longhorn Racing, Longhorn Rocketry Association, Texas Spacecraft Laboratory, ASE/EM Tutor</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section id="projects">
+      <div class="divider"></div>
+      <div class="section-label">04 / Projects</div>
+      <h2 class="section-title">Engineering <em>Manifest</em></h2>
+      <p style="font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-bottom:2rem;letter-spacing:.1em;">
+        // CLICK ANY PROJECT TO EXPAND
+      </p>
+
+      <!--
+        ✏️ TO CUSTOMISE EACH PROJECT:
+        Edit the data-* attributes on each .project-card:
+          data-icon       = emoji shown in tile + modal header
+          data-title      = project name
+          data-tags       = comma-separated tag list
+          data-desc       = full description (shown in modal)
+          data-tool       = "Tools / Software used" detail
+          data-outcome    = "Key outcome / result" detail
+          data-github     = GitHub URL  (leave empty to hide button)
+          data-report     = Report/Demo URL (leave empty to hide button)
+          data-featured   = "true" to show the Featured badge
+      -->
+	
+      <div class="projects-grid">
+
+        <div class="project-card fade-in"
+          data-icon="🚀"
+	  data-image="assets/Turbojet.png"
+          data-title="Flamefront Propulsion"
+          data-tags="Propulsion,CAD,Python"
+          data-desc="Developed a first-principles turbojet engine modeling tool in Python to analyze propulsion performance across a full flight envelope. The model integrated publicly available propulsion libraries including PyTurb and Radcomp, with custom data ingestion and preprocessing pipelines to ensure compatibility with cycle analysis tools such as PyCycle. Inputs included Mach number, altitude, and preliminary engine geometry, enabling prediction of thrust, specific fuel consumption (SFC), and key thermodynamic cycle performance metrics.
+Built robust data cleaning and transformation scripts to convert compressor and turbine map outputs from Radcomp and PyTurb into formats suitable for cycle-level simulation, resolving inconsistencies in scaling, indexing, and convergence behavior. Implemented component selection logic under mechanical and thermodynamic constraints to evaluate feasible engine configurations and optimize performance tradeoffs, resulting in a 6% increase in predicted thrust.
+Validated model predictions against available experimental and reference data, achieving agreement within 10% for key performance parameters across operating conditions. Closed the engineering loop by translating cycle analysis outputs into preliminary engine geometry and CAD designs, connecting thermodynamic modeling directly to hardware-level design decisions."
+          data-tool="SolidWorks, Python, GitHub"
+          data-outcome="Achieved 6% thrust increase from initial CAD
+Key performance parameters within 10% accuracy"
+          data-github=""
+          data-report="">
+          <div class="project-tile-bg">
+            <img src="assets/Flamefront_Logo.jpg" alt="Flamefront Propulsion">
+          </div>
+          <div class="project-tile-hint">CLICK TO EXPAND ↗</div>
+          <div class="project-tile-info">
+            <div class="project-tile-title">Flamefront Propulsion</div>
+            <div class="project-tile-tags">
+              <span class="project-tile-tag">Propulsion</span>
+              <span class="project-tile-tag">MATLAB</span>
+              <span class="project-tile-tag">CAD</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in"
+          data-icon="🛰️"
+	  data-image="assets/TBC.jpg"
+          data-title="The Boring Company"
+          data-tags="CAD, Integration, Drawings, Kitting"
+          data-desc="Supported high-throughput tunnel construction operations by refurbishing and integrating critical underground delivery and support systems, with primary ownership of the Segment Presenter used for continuous tunnel segment delivery to the TBM. The system was designed to enable uninterrupted tunneling operations by automating the transport and positioning of concrete segments, directly supporting zero-people-in-tunnel workflows and maximizing machine utilization.
+Led refurbishment and re-integration of an existing segment presenter using a subassembly-based build strategy to streamline rebuild complexity and improve system reliability under production constraints. Coordinated cross-functional fabrication and assembly activities including welding, kitting, torque-controlled mechanical assembly, and material handling, operating within a reverse production timeline where field requirements dictated redesign and rapid execution.
+In addition to primary ownership of the Segment Presenter, contributed to multiple supporting infrastructure systems including the Mini Grease Skid, Grout Skid, Main Beam, Tow Beam, and VC systems. These efforts supported continuous tunneling operations by ensuring reliable material flow, machine support infrastructure, and subsystem readiness across active tunnel sites."
+          data-tool="SolidWorks, Power Tools, Sheets, Slides"
+          data-outcome="Managed 5+ Active Projects and delivered them with minimal slips through timeline management and hands-on integration work"
+          data-github=""
+          data-report="">
+	  <div class="project-tile-bg">
+            <img src="assets/Boring-Company-Prufrock-5.jpeg" alt="The Boring Company">
+          </div>
+          <div class="project-tile-hint">CLICK TO EXPAND ↗</div>
+          <div class="project-tile-info">
+            <div class="project-tile-title">The Boring Company</div>
+            <div class="project-tile-tags">
+              <span class="project-tile-tag">CAD</span>
+              <span class="project-tile-tag">Integration</span>
+              <span class="project-tile-tag">Drawings</span>
+	      <span class="project-tile-tag">Kitting</span>
+            </div>
+          </div>
+        </div>
+	
+	<div class="project-card fade-in"
+          data-icon="🌊"
+	  data-image="assets/Avionics Bay Transparency.png"
+          data-title="Longhorn Rocketry: Avionics Bay"
+          data-tags="FEA,CAD,3D Printing"
+          data-desc="Collaboratively designed and manufactured a fully 3D-printed avionics bay for a high-power rocket system, providing a compact and structurally integrated housing for flight electronics, recovery system interfaces, and onboard instrumentation. The design focused on maintaining reliable component accessibility while meeting geometric and structural constraints within the rocket airframe.
+Developed the avionics bay assembly to support clean integration of critical flight hardware including electronics mounting, wiring management, and recovery subsystem interfaces. Emphasized modularity and maintainability to simplify assembly, inspection, and post-flight servicing during launch operations.
+Performed finite element analysis (FEA) to evaluate structural performance under expected launch and recovery loading conditions, validating the integrity of the printed structure and identifying areas for reinforcement and optimization."
+          data-tool="SolidWorks, ANSYS Mechanical, 3D Printing"
+          data-outcome="Balanced weight reduction, manufacturability and robustness 
+Critical buckling load factor 3.2 (> 1.5 requirement)"
+          data-github=""
+          data-report="">
+          <div class="project-tile-bg">
+		<img src="assets/LRA-Logo-James-A-Schoener.jpg" alt="LRA">
+	  </div>
+          <div class="project-tile-hint">CLICK TO EXPAND ↗</div>
+          <div class="project-tile-info">
+            <div class="project-tile-title">Longhorn Rocketry: Avionics Bay</div>
+            <div class="project-tile-tags">
+              <span class="project-tile-tag">FEA</span>
+              <span class="project-tile-tag">CAD</span>
+              <span class="project-tile-tag">3D Printing</span>
+            </div>
+          </div>
+        </div>
+
+	<div class="project-card fade-in"
+          data-icon="🌊"
+	  data-image="assets/T_LOFT_Vehicle.png"
+          data-title="T-LOFT DARPA Heavy Lift Challenge"
+          data-tags="FEA,CAD,3D Printing, Simulation"
+          data-desc="Contributed to the design and system-level analysis of a VTOL heavy-lift aircraft concept developed for the DARPA Lift Challenge, targeting extreme payload-to-weight performance under strict structural and flight constraints. The concept focused on achieving a 4:1 payload-to-aircraft weight ratio while maintaining vertical takeoff/landing capability and stable forward flight across a 4 nautical mile loaded mission envelope.
+Designed a full VTOL airframe in CAD, including a 7 ft wingspan lifting configuration integrated with a compact quadrotor-style 39×39 in central frame. The architecture balanced hover efficiency and cruise performance through a hybrid lifting strategy, supported by propulsion sizing and rotor placement optimization to ensure sufficient thrust authority and control stability across all flight modes.
+Collaborated to perform Euler buckling analysis on primary load-bearing members, ensuring a factor of safety of 5 under worst-case aerodynamic and maneuver loads. Optimized carbon fiber rod geometries and structural layouts to minimize weight while maintaining rigidity under high-g loading conditions up to 5g.
+Developed rotor dynamics and flight simulation models to evaluate VTOL transition and cruise performance. Identified an optimal cruise condition at approximately 14° angle of attack and 18 m/s forward velocity, enabling efficient lift generation and stable flight envelope operation. Results were validated using 6-DOF simulation and PD control modeling to confirm feasibility of controllability across hover-to-cruise transitions."
+          data-tool="SolidWorks, 3D Printing, MATLAB, SIMULINK, Python"
+          data-outcome="Optimal Cruise Condition Found 
+FOS 5"
+
+          data-github=""
+          data-report="">
+          <div class="project-tile-bg">
+	   <img src="assets/TLOFT_logo.png" alt="TLOFT">
+	  </div>
+          <div class="project-tile-hint">CLICK TO EXPAND ↗</div>
+          <div class="project-tile-info">
+            <div class="project-tile-title">T-LOFT DARPA Heavy Lift Challenge</div>
+            <div class="project-tile-tags">
+              <span class="project-tile-tag">FEA</span>
+              <span class="project-tile-tag">CAD</span>
+              <span class="project-tile-tag">3D Printing</span>
+	      <span class="project-tile-tag">Simulation</span>
+            </div>
+          </div>
+        </div>
+
+
+	<div class="project-card fade-in"
+          data-icon="🛩️"
+	  data-image="assets/Flip_Up.png"
+          data-title="Longhorn Racing: Wheel Deflectors"
+          data-tags="CAD, CFD, Composites"
+          data-desc="Designed and manufactured aerodynamic wheel deflectors to improve airflow management around the vehicle wheels and reduce aerodynamic losses. Conducted an iterative aerodynamic optimization process beginning with 2D multi-airfoil cascade analysis to identify high lift-to-drag ratio geometries before transitioning into detailed 3D CFD studies. Optimized chord length, angle of attack, and airfoil positioning to maximize aerodynamic efficiency while improving flow behavior around the wheel wake region.
+Led composite manufacturing efforts by performing carbon fiber layups over foam cores for the airfoil structures and executing resin infusion manufacturing with Nomex honeycomb cores for the side panel assembly to achieve a lightweight, high-stiffness structure. Designed and integrated Aluminum 6061 support ribs to structurally connect the aerodynamic package to the vehicle side panel and chassis mounting points while maintaining manufacturability and structural integrity under race conditions." 
+
+          data-tool="ANSYS Fluent, SolidWorks, Cadence CFD"
+          data-outcome= "Helped increase lift to drag ratio to 2:1
+12% of total downforce (40 N)"
+          data-github=""
+          data-report=""
+          data-featured="">
+          <!--<div class="featured-badge">Featured</div>--!>
+          <div class="project-tile-bg">
+	   <img src="assets/LHR_Angelique.jpg" alt="TLOFT">
+	  </div>
+          <div class="project-tile-hint">CLICK TO EXPAND ↗</div>
+          <div class="project-tile-info">
+            <div class="project-tile-title">Longhorn Racing: Wheel Deflectors</div>
+            <div class="project-tile-tags">
+              <span class="project-tile-tag">CAD</span>
+              <span class="project-tile-tag">CFD</span>
+	      <span class="project-tile-tag">Composites</span>
+            </div>
+          </div>
+        </div>
+	
+	<div class="project-card fade-in"
+          data-icon="🛩️"
+	  data-image="assets/Sidepod.png"
+          data-title="Longhorn Racing: Sidepod"
+          data-tags="CAD, CFD, Composites, 3D Printing"
+          data-desc="Designed and manufactured a Formula SAE sidepod assembly focused on aerodynamic efficiency, cooling performance, and manufacturability. Began the design process by obtaining radiator inlet dimensional requirements from the powertrain team and developing the initial sidepod geometry in CAD around cooling system constraints. Researched and incorporated aerodynamic concepts inspired by modern Formula One sidepod architectures to improve external flow management and reduce drag.
+Developed multiple design iterations through collaborative design reviews, refining the geometry into a more streamlined profile while reducing radiator inlet area without compromising cooling performance. Successfully achieved the airflow and packaging targets specified by the powertrain team while improving the aerodynamic integration of the vehicle bodywork.
+Supported manufacturing planning by helping divide the sidepod geometry into multiple 3D-printed tooling sections that could be bonded together to create a full-scale female mold. Manufactured the final composite structure using carbon fiber layups and completed post-processing operations including sanding and gel coating to achieve a high-quality aerodynamic surface finish suitable for race conditions." 
+
+          data-tool="ANSYS Fluent, SolidWorks, Cadence CFD"
+          data-outcome= "21.8 m/s inlet velocity and 20 m/s exit velocity
+Viscous drag was kept minimal"
+          data-github=""
+          data-report=""
+          data-featured="">
+          <!--<div class="featured-badge">Featured</div>--!>
+          <div class="project-tile-bg">
+	   <img src="assets/Nightwatch.JPG" alt="TLOFT">
+	  </div>
+          <div class="project-tile-hint">CLICK TO EXPAND ↗</div>
+          <div class="project-tile-info">
+            <div class="project-tile-title">Longhorn Racing: Sidepod</div>
+            <div class="project-tile-tags">
+              <span class="project-tile-tag">CAD</span>
+              <span class="project-tile-tag">CFD</span>
+	      <span class="project-tile-tag">Composites</span>
+	      <span class="project-tile-tag">3D Printing</span>
+            </div>
+          </div>
+        </div>
+
+	 <div class="project-card fade-in"
+          data-icon="🛰️"
+	  data-video="assets/Automatic Headrest Adjustor LinkedIn (1).mp4"
+          data-title="Automatic Headrest Adjustor"
+          data-tags="CAD, Gaant Chart, Electromechanics"
+          data-desc="Designed and prototyped an automated car headrest adjustment system to improve ergonomic comfort and usability compared to traditional fixed-notch headrest mechanisms. Existing systems provided limited adjustability, typically constrained to discrete height positions, making it difficult for users to achieve optimal head and neck support across different driving conditions.
+Evaluated multiple actuation concepts using a structured design matrix approach, ultimately selecting a linear actuator-based solution for its balance of cost, simplicity, and controllability. Developed the full mechanical design in Autodesk Inventor, integrating the actuation system directly into the existing headrest frame while preserving structural integrity of both support rods.
+Built and assembled a functional prototype using off-the-shelf components, implementing switch-based control logic and soldered electrical connections for actuation control. Routed and concealed wiring within the seat structure to maintain a clean user interface and prevent interference with normal seat operation. Mechanically fastened and bolted components onto the frame to ensure stability under repeated load and adjustment cycles."
+          data-tool="Autodesk Inventor, Soldering"
+          data-outcome="Low cost and smooth headrest height adjustment
+Structural rigidity maintained from original seat assembly"
+          data-github=""
+          data-report="">
+          <div class="project-tile-bg">
+	    <img src="assets/Headrest.jpg" alt="Flamefront Propulsion">
+	  </div>
+          <div class="project-tile-hint">CLICK TO EXPAND ↗</div>
+          <div class="project-tile-info">
+            <div class="project-tile-title">Automatic Headrest Adjustor</div>
+            <div class="project-tile-tags">
+              <span class="project-tile-tag">CAD</span>
+              <span class="project-tile-tag">Gaant Chart</span>
+              <span class="project-tile-tag">Electromechanics</span>
+            </div>
+          </div>
+        </div>
+
+	<div class="project-card fade-in"
+          data-icon="🛰️"
+	  data-image="assets/Automated_Object_Retriever_1.jpg"
+          data-title="Automatic Object Retriever"
+          data-tags="CAD, Python, VEX Robotics"
+          data-desc="Developed an autonomous object detection and retrieval system designed for structured search-and-rescue-style environments where direct human intervention is limited or unsafe. The system was built to identify weighted objects using color-coded handles and autonomously navigate them back to a base location, demonstrating a simplified but functional retrieval logic applicable to constrained rescue scenarios.
+Designed the full mechanical and system architecture using engineering drawings in collaboration with team members, focusing on reliable object interaction, handling stability, and repeatable grasp-and-return behavior. The design prioritized robustness and simplicity to ensure consistent operation in non-ideal environments.
+Implemented the search and navigation logic using Python in VEXcode, developing a rule-based exploration and decision-making algorithm for object identification, selection, and return-to-base behavior. The system integrated sensor inputs with control logic to enable autonomous operation within a defined workspace."
+          data-tool="Autodesk Inventor, Python, Vex Robotics"
+          data-outcome="Able to retrieve all 3 weights with minimal help for redirection after bringing back to base"
+          data-github=""
+          data-report="">
+          <div class="project-tile-bg">
+	   <img src="assets/Automated_Object_Retriever_2.jpg" alt="TLOFT">
+	  </div>
+          <div class="project-tile-hint">CLICK TO EXPAND ↗</div>
+          <div class="project-tile-info">
+            <div class="project-tile-title">Automatic Object Retriever</div>
+            <div class="project-tile-tags">
+              <span class="project-tile-tag">CAD</span>
+              <span class="project-tile-tag">Python</span>
+              <span class="project-tile-tag">Vex Robotics</span>
+            </div>
+          </div>
+        </div>
+
+	<div class="project-card fade-in"
+          data-icon="🛰️"
+	  data-video="assets/3D Printed Safe.MOV"
+          data-title="3D Printed Safe"
+          data-tags="CAD, 3D Printing"
+          data-desc="Designed and developed a fully 3D-printed portable safe for the SkillsUSA engineering design competition, with a focus on reducing manufacturing cost while maintaining functional mechanical security. The project explored how additive manufacturing could be used to create low-cost consumer products with integrated mechanical systems and minimal post-processing requirements.
+Created the complete safe assembly and internal locking mechanism in Autodesk Inventor, designing all components for manufacturability through 3D printing. Developed a custom rack-and-pinion locking system to translate rotational input into linear locking motion, enabling a compact and fully integrated mechanical security solution without requiring complex external hardware.
+The design emphasized portability, modular assembly, and print-friendly geometry while demonstrating practical mechanical design principles such as motion transfer, tolerance management, and component integration within additive manufacturing constraints."
+          data-tool="Autodesk Inventor, 3D Printing"
+          data-outcome="Lock and safe printed under printing time restrictions
+Qualified for and competed in SkillsUSA State competitions"
+          data-github=""
+          data-report="">
+          <div class="project-tile-bg">
+	   <img src="assets/3D Printed Safe.jpg" alt="TLOFT">
+	  </div>
+          <div class="project-tile-hint">CLICK TO EXPAND ↗</div>
+          <div class="project-tile-info">
+            <div class="project-tile-title">3D Printed Safe</div>
+            <div class="project-tile-tags">
+              <span class="project-tile-tag">CAD</span>
+              <span class="project-tile-tag">3D Printing</span>
+            </div>
+          </div>
+        </div>
+
+        
+
+      </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section id="contact">
+      <div class="divider"></div>
+      <div class="section-label">05 / Contact</div>
+      <h2 class="section-title">Establish <em>Comms</em></h2>
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <h3>Ready for Liftoff?</h3>
+          <p>I'm actively seeking internships and full-time opportunities in aerospace engineering. Whether it's a question about my projects or a potential collaboration — let's connect.</p>
+          <div class="contact-links">
+            <a class="contact-link-item" href="mailto:rohitrakshanp.official@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              rohitrakshanp.official@gmail.com
+            </a>
+            <a class="contact-link-item" href="https://www.linkedin.com/in/rohit-rakshan-palanikumar-0b320b297" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              https://www.linkedin.com/in/rohit-rakshan-palanikumar-0b320b297
+            </a>
+		 <!-- 
+            <a class="contact-link-item" href="https://github.com/yourusername" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              github.com/yourusername
+            </a>
+		-->
+          </div>
+        </div>
+        <form class="contact-form fade-in" id="contact-form">
+          <div class="form-field">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" placeholder="John Recruiter" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" placeholder="recruiter@company.com" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-input" id="message" placeholder="Tell me about the opportunity..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submit-btn">Send Transmission →</button>
+          <div id="form-msg" style="font-family:var(--font-mono);font-size:.72rem;color:var(--accent2);display:none;">✓ Message received. Initiating response sequence.</div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2025 <b>ROHIT RAKSHAN PALANIKUMAR</b> — Built with raw HTML, CSS & Canvas</span>
+      <span style="color:var(--text-muted)">Aerospace Engineering Portfolio</span>
+    </footer>
+
+  </div><!-- /site-wrap -->
+
+  <script>
+    /* ── CURSOR ── */
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursor-ring');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function animCursor(){
+      rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+      cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+      ring.style.left=rx+'px';   ring.style.top=ry+'px';
+      requestAnimationFrame(animCursor);
+    })();
+
+    /* ── TYPED TEXT ── */
+    const phrases = ['Designing the future of flight.','CFD & Aerodynamics enthusiast.','From MATLAB to the mesosphere.','Pushing boundaries at Mach+.','Open to internship opportunities.'];
+    let pi=0,ci=0,del=false;
+    const typedEl=document.getElementById('typed-text');
+    function typeLoop(){
+      const p=phrases[pi%phrases.length];
+      typedEl.textContent=del?p.slice(0,ci--):p.slice(0,ci++);
+      if(!del&&ci>p.length){del=true;setTimeout(typeLoop,1800);return;}
+      if(del&&ci<0){del=false;pi++;ci=0;setTimeout(typeLoop,400);return;}
+      setTimeout(typeLoop,del?40:70);
+    }
+    typeLoop();
+
+    /* ── SCROLL FADE-IN ── */
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+    document.querySelectorAll('.fade-in,.timeline-item').forEach(el=>obs.observe(el));
+
+    /* ── CONTACT FORM ── */
+    document.getElementById('contact-form').addEventListener('submit',function(e){
+      e.preventDefault();
+      document.getElementById('submit-btn').textContent='Sent ✓';
+      document.getElementById('submit-btn').style.color='var(--accent2)';
+      document.getElementById('form-msg').style.display='block';
+      this.reset();
+    });
+
+    /* ════════════════════════════════════
+       F-16 SCROLL PROGRESS BAR
+    ════════════════════════════════════ */
+    const f16jet   = document.getElementById('f16-jet');
+    const f16trail = document.getElementById('f16-trail');
+    const f16pct   = document.getElementById('f16-pct');
+    const f16track = document.getElementById('f16-track');
+
+    function updateF16(){
+      const scrollY    = window.scrollY;
+      const pageHeight = document.body.scrollHeight - window.innerHeight;
+      const progress   = pageHeight > 0 ? Math.min(1, scrollY / pageHeight) : 0;
+      const pct        = Math.round(progress * 100);
+
+      // Track spans from left:48px to right:48px (accounting for pct label)
+      const barW      = f16track.offsetWidth;  // pixel width of track element
+      const trackLeft = 48; // px from bar left edge (matches CSS left:48px on track)
+      const jetX      = trackLeft + progress * barW; // px from bar left
+
+      f16jet.style.left   = jetX + 'px';
+      f16trail.style.width = (progress * 100) + '%';
+      f16pct.textContent  = pct + '%';
+    }
+
+    window.addEventListener('scroll', updateF16, { passive: true });
+    window.addEventListener('resize', updateF16);
+    updateF16();
+    /* ════════════════════════════════════
+       PROJECT MODAL SYSTEM
+    ════════════════════════════════════ */
+    const overlay      = document.getElementById('project-modal-overlay');
+    const modalHero    = document.getElementById('modal-hero');
+    const modalTags    = document.getElementById('modal-tags');
+    const modalTitle   = document.getElementById('modal-title');
+    const modalDesc    = document.getElementById('modal-desc');
+    const modalDetails = document.getElementById('modal-details');
+    const modalLinks   = document.getElementById('modal-links');
+    const closeBtn     = document.getElementById('modal-close-btn');
+
+    function openModal(card){
+      const icon    = card.dataset.icon    || '🛩️';
+      const image   = card.dataset.image   || '';
+      const video   = card.dataset.video   || '';
+      const title   = card.dataset.title   || 'Project';
+      const tags    = (card.dataset.tags   || '').split(',').map(s=>s.trim()).filter(Boolean);
+      const desc    = card.dataset.desc    || '';
+      const tool    = card.dataset.tool    || '';
+      const outcome = card.dataset.outcome || '';
+      const ghUrl   = card.dataset.github  || '';
+      const repUrl  = card.dataset.report  || '';
+	
+      // Modal Hero - Show image if available
+      const modalHero = document.getElementById('modal-hero');
+      if (video) {
+        modalHero.innerHTML = `
+          <video autoplay loop controls
+                 style="width:100%; height:100%; object-fit:contain;">
+            <source src="${video}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>`;
+      }
+      else if (image) {
+        modalHero.innerHTML = `<img src="${image}" alt="${title}" style="width:100%; height:100%; object-fit:contain;">`;
+      } else {
+        modalHero.textContent = icon;
+      }
+      
+
+      // Description as bullet list (supports \n)
+      modalDesc.innerHTML = desc 
+        ? '<ul style="padding-left:1.4rem; margin:1rem 0;">' + 
+          desc.split('\n').map(line => `<li style="margin-bottom:0.6rem; color:var(--text-dim);">${line.trim()}</li>`).join('') + 
+          '</ul>'
+        : '';
+
+      modalTags.innerHTML = tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
+
+      modalDetails.innerHTML = '';
+      if(tool){
+        modalDetails.innerHTML += `<div class="modal-detail-box"><span class="modal-detail-label">Tools / Software</span><div class="modal-detail-val">${tool}</div></div>`;
+      }
+      if(outcome){
+        modalDetails.innerHTML += 
+          `<div class="modal-detail-box">
+             <span class="modal-detail-label">Key Outcome</span>
+             <div class="modal-detail-val" style="margin-top:0.5rem;">
+               <ul style="padding-left:1.2rem;">` +
+                 outcome.split('\n').map(line => `<li style="margin-bottom:0.5rem;">${line.trim()}</li>`).join('') +
+               `</ul>
+             </div>
+           </div>`;
+      }
+
+      const ghIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>`;
+      const extIcon= `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+	
+      modalLinks.innerHTML = '';
+      if(ghUrl)  modalLinks.innerHTML += `<a class="modal-link" href="${ghUrl}" target="_blank">${ghIcon} GitHub</a>`;
+      if(repUrl) modalLinks.innerHTML += `<a class="modal-link" href="${repUrl}" target="_blank">${extIcon} Report / Demo</a>`;
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(){
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    
+    
+    // STOP ANY VIDEO
+      const video = modalHero.querySelector('video');
+      if (video) {
+        video.pause();
+        video.currentTime = 0;   // Optional: reset to beginning
+      }
+
+      // Reset hero
+      modalHero.innerHTML = '🛩️';
+    }
+
+    document.querySelectorAll('.project-card').forEach(card=>{
+      card.addEventListener('click', ()=> openModal(card));
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', e=>{
+      if(e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', e=>{
+      if(e.key === 'Escape') closeModal();
+    });
+
+    /* ── NAV scroll highlight ── */
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll',()=>{
+      let cur='';
+      sections.forEach(s=>{ if(window.scrollY>=s.offsetTop-80) cur=s.id; });
+      document.querySelectorAll('.nav-links a').forEach(a=>{
+        a.style.color = a.getAttribute('href')==='#'+cur ? 'var(--accent)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
