@@ -882,9 +882,26 @@ Dynamics, Electromechanical Systems Lab, Computational Methods for Structural An
 	  data-image="assets/Turbojet.png"
           data-title="Flamefront Propulsion"
           data-tags="Propulsion,CAD,Python"
-          data-desc="Developed a first-principles turbojet engine modeling tool in Python to analyze propulsion performance across a full flight envelope. The model integrated publicly available propulsion libraries including PyTurb and Radcomp, with custom data ingestion and preprocessing pipelines to ensure compatibility with cycle analysis tools such as PyCycle. Inputs included Mach number, altitude, and preliminary engine geometry, enabling prediction of thrust, specific fuel consumption (SFC), and key thermodynamic cycle performance metrics.
-Built robust data cleaning and transformation scripts to convert compressor and turbine map outputs from Radcomp and PyTurb into formats suitable for cycle-level simulation, resolving inconsistencies in scaling, indexing, and convergence behavior. Implemented component selection logic under mechanical and thermodynamic constraints to evaluate feasible engine configurations and optimize performance tradeoffs, resulting in a 6% increase in predicted thrust.
-Validated model predictions against available experimental and reference data, achieving agreement within 10% for key performance parameters across operating conditions. Closed the engineering loop by translating cycle analysis outputs into preliminary engine geometry and CAD designs, connecting thermodynamic modeling directly to hardware-level design decisions."
+          data-desc="Objective & Requirements
+Develop a first-principles turbojet modeling tool to evaluate engine performance across a full flight envelope
+Predict thrust, SFC, and thermodynamic cycle behavior from Mach, altitude, and preliminary engine geometry inputs
+Enable early-stage propulsion design decisions by linking cycle analysis to hardware feasibility
+Design & Analysis
+Built a Python-based propulsion modeling framework integrating PyTurb, Radcomp, and PyCycle for cycle-level simulation
+Developed custom data ingestion and preprocessing pipelines to standardize compressor/turbine maps for cycle analysis compatibility
+Resolved convergence, scaling, and indexing issues in engine map data to improve model stability and robustness
+Implemented constraint-based engine selection logic to evaluate feasible configurations and optimize performance tradeoffs, achieving ~6% thrust improvement in design studies
+Testing & Validation
+Validated model outputs against reference and experimental data across multiple operating conditions
+Achieved agreement within ~10% for key performance metrics including thrust and thermodynamic cycle behavior
+Performed sensitivity checks across flight envelope to verify model stability and physical consistency
+Closed the loop by translating cycle outputs into preliminary engine geometry and CAD-level design concepts
+Specific Role
+Developed the end-to-end propulsion modeling tool in Python from first principles
+Owned integration of PyTurb, Radcomp, and PyCycle into a unified analysis workflow
+Designed and implemented data cleaning pipelines for compressor/turbine map compatibility
+Built engine performance prediction and optimization logic under thermodynamic and mechanical constraints
+Translated simulation outputs into CAD-ready preliminary engine designs linking analysis to hardware implementation"
           data-tool="SolidWorks, Python, GitHub"
           data-outcome="Achieved 6% thrust increase from initial CAD
 Key performance parameters within 10% accuracy"
@@ -909,9 +926,24 @@ Key performance parameters within 10% accuracy"
 	  data-image="assets/TBC.jpg"
           data-title="The Boring Company"
           data-tags="CAD, Integration, Drawings, Kitting"
-          data-desc="Supported high-throughput tunnel construction operations by refurbishing and integrating critical underground delivery and support systems, with primary ownership of the Segment Presenter used for continuous tunnel segment delivery to the TBM. The system was designed to enable uninterrupted tunneling operations by automating the transport and positioning of concrete segments, directly supporting zero-people-in-tunnel workflows and maximizing machine utilization.
-Led refurbishment and re-integration of an existing segment presenter using a subassembly-based build strategy to streamline rebuild complexity and improve system reliability under production constraints. Coordinated cross-functional fabrication and assembly activities including welding, kitting, torque-controlled mechanical assembly, and material handling, operating within a reverse production timeline where field requirements dictated redesign and rapid execution.
-In addition to primary ownership of the Segment Presenter, contributed to multiple supporting infrastructure systems including the Mini Grease Skid, Grout Skid, Main Beam, Tow Beam, and VC systems. These efforts supported continuous tunneling operations by ensuring reliable material flow, machine support infrastructure, and subsystem readiness across active tunnel sites."
+          data-desc="Objective & Requirements
+Enable high-throughput tunnel construction by supporting continuous underground material delivery and TBM support systems
+Own and improve the Segment Presenter system to ensure uninterrupted concrete segment delivery and positioning for TBM operation
+Support “zero-people-in-tunnel” operations and maximize machine utilization through reliable automation of material flow systems
+Design & Analysis
+Led refurbishment and re-integration of an existing Segment Presenter using a subassembly-based build strategy to reduce system complexity and improve maintainability under production constraints
+Translated field-driven requirements into rebuild priorities under a reverse production timeline, where operational needs dictated design execution and iteration
+Supported system-level integration across supporting infrastructure including Mini Grease Skid, Grout Skid, Main Beam, Tow Beam, and VC systems to ensure continuous tunneling capability
+Testing & Validation
+Coordinated functional readiness through cross-functional fabrication and assembly workflows including welding, kitting, torque-controlled assembly, and material handling
+Supported system integration verification during active build and deployment cycles to ensure reliability under operational load conditions
+Assisted in resolving integration and build issues identified during assembly and field deployment phases
+Specific Role
+Owned refurbishment and integration of the Segment Presenter subsystem critical to automated tunnel segment delivery
+Coordinated cross-functional execution across fabrication, welding, assembly, and logistics teams in a fast-paced production environment
+Managed kitting, torque-controlled assembly processes, and material flow for subsystem rebuild and deployment
+Contributed to multiple TBM support systems including grease, grout, structural beams, and auxiliary transport systems
+Ensured system readiness for continuous tunneling operations supporting zero-people-in-tunnel workflow architecture"
           data-tool="SolidWorks, Power Tools, Sheets, Slides"
           data-outcome="Managed 5+ Active Projects and delivered them with minimal slips through timeline management and hands-on integration work"
           data-github=""
@@ -936,10 +968,25 @@ In addition to primary ownership of the Segment Presenter, contributed to multip
 	  data-image="assets/Avionics Bay Transparency.png"
           data-title="Longhorn Rocketry: Avionics Bay"
           data-tags="FEA,CAD,3D Printing"
-          data-desc="Collaboratively designed and manufactured a fully 3D-printed avionics bay for a high-power rocket system, providing a compact and structurally integrated housing for flight electronics, recovery system interfaces, and onboard instrumentation. The design focused on maintaining reliable component accessibility while meeting geometric and structural constraints within the rocket airframe.
-Developed the avionics bay assembly to support clean integration of critical flight hardware including electronics mounting, wiring management, and recovery subsystem interfaces. Emphasized modularity and maintainability to simplify assembly, inspection, and post-flight servicing during launch operations.
-Performed finite element analysis (FEA) to evaluate structural performance under expected launch and recovery loading conditions, validating the integrity of the printed structure and identifying areas for reinforcement and optimization."
-          data-tool="SolidWorks, ANSYS Mechanical, 3D Printing"
+          data-desc="Objective & Requirements
+Design a lightweight avionics bay for a high-power rocket with integrated flight electronics and recovery systems
+Ensure structural integrity under launch loads while maintaining compact packaging within the airframe
+Enable reliable electronics access, modularity, and post-flight serviceability
+Design & Analysis
+Designed a fully 3D-printed avionics bay integrating electronics mounting, wiring routing, and recovery system interfaces
+Developed modular architecture to simplify assembly, inspection, and maintenance across flight operations
+Balanced geometric constraints with structural requirements to ensure proper fit within rocket airframe
+Testing & Validation
+Performed finite element analysis (FEA) to evaluate structural response under expected launch and recovery loading conditions
+Identified high-stress regions and iterated design reinforcement strategies for improved structural reliability
+Validated manufacturability through iterative 3D-printed prototypes and fit checks within the airframe
+Specific Role
+Led CAD design and structural layout of the avionics bay assembly
+Owned integration of electronics mounting, wiring management, and recovery subsystem interfaces
+Conducted FEA-based structural validation and guided reinforcement decisions
+Managed end-to-end prototype development using additive manufacturing techniques
+Ensured design met both structural requirements and operational accessibility constraints"
+		  data-tool="SolidWorks, ANSYS Mechanical, 3D Printing"
           data-outcome="Balanced weight reduction, manufacturability and robustness 
 Critical buckling load factor 3.2 (> 1.5 requirement)"
           data-github=""
@@ -963,11 +1010,28 @@ Critical buckling load factor 3.2 (> 1.5 requirement)"
 	  data-image="assets/T_LOFT_Vehicle.png"
           data-title="T-LOFT DARPA Heavy Lift Challenge"
           data-tags="FEA,CAD,3D Printing, Simulation"
-          data-desc="Contributed to the design and system-level analysis of a VTOL heavy-lift aircraft concept developed for the DARPA Lift Challenge, targeting extreme payload-to-weight performance under strict structural and flight constraints. The concept focused on achieving a 4:1 payload-to-aircraft weight ratio while maintaining vertical takeoff/landing capability and stable forward flight across a 4 nautical mile loaded mission envelope.
-Designed a full VTOL airframe in CAD, including a 7 ft wingspan lifting configuration integrated with a compact quadrotor-style 39×39 in central frame. The architecture balanced hover efficiency and cruise performance through a hybrid lifting strategy, supported by propulsion sizing and rotor placement optimization to ensure sufficient thrust authority and control stability across all flight modes.
-Collaborated to perform Euler buckling analysis on primary load-bearing members, ensuring a factor of safety of 5 under worst-case aerodynamic and maneuver loads. Optimized carbon fiber rod geometries and structural layouts to minimize weight while maintaining rigidity under high-g loading conditions up to 5g.
-Developed rotor dynamics and flight simulation models to evaluate VTOL transition and cruise performance. Identified an optimal cruise condition at approximately 14° angle of attack and 18 m/s forward velocity, enabling efficient lift generation and stable flight envelope operation. Results were validated using 6-DOF simulation and PD control modeling to confirm feasibility of controllability across hover-to-cruise transitions."
-          data-tool="SolidWorks, 3D Printing, MATLAB, SIMULINK, Python"
+          data-desc="Objective & Requirements
+Develop a VTOL heavy-lift aircraft concept for DARPA Lift Challenge with extreme payload-to-weight performance (~4:1 target)
+Enable stable vertical takeoff/landing and efficient forward flight over a 4 nautical mile mission envelope
+Maintain structural integrity under high-g loading while minimizing overall airframe mass
+Design & Analysis
+Designed full VTOL airframe in CAD featuring a 7 ft wingspan lifting configuration integrated with a 39×39 in quadrotor-style central frame
+Developed hybrid lift architecture balancing rotor-based hover efficiency with fixed-wing cruise performance
+Performed rotor placement and propulsion sizing studies to ensure sufficient thrust authority and control stability across flight modes
+Conducted Euler buckling analysis on primary structural members, achieving FOS ≥ 5 under worst-case loading conditions
+Optimized carbon fiber rod-based structures to reduce mass while maintaining stiffness under up to ~5g loading
+Testing & Validation
+Developed rotor dynamics and flight simulation models to evaluate hover, transition, and cruise performance
+Identified optimal cruise condition (~14° angle of attack, ~18 m/s forward velocity) for stable and efficient flight
+Validated vehicle controllability using 6-DOF simulation and PD control modeling across hover-to-cruise transitions
+Cross-checked structural and dynamic results to ensure coupled aero-structural feasibility
+Specific Role
+Contributed to system-level design and architecture of the VTOL heavy-lift aircraft concept
+Led CAD development of primary airframe structure and hybrid lift configuration
+Performed Euler buckling and structural analysis of load-bearing members using carbon fiber reinforcement assumptions
+Built and contributed to rotor dynamics and flight simulation models for performance and stability evaluation
+Supported integration of aerodynamic, structural, and control system considerations into a unified vehicle design"
+		  data-tool="SolidWorks, 3D Printing, MATLAB, SIMULINK, Python"
           data-outcome="Optimal Cruise Condition Found 
 FOS 5"
 
@@ -994,9 +1058,26 @@ FOS 5"
 	  data-image="assets/Flip_Up.png"
           data-title="Longhorn Racing: Wheel Deflectors"
           data-tags="CAD, CFD, Composites"
-          data-desc="Designed and manufactured aerodynamic wheel deflectors to improve airflow management around the vehicle wheels and reduce aerodynamic losses. Conducted an iterative aerodynamic optimization process beginning with 2D multi-airfoil cascade analysis to identify high lift-to-drag ratio geometries before transitioning into detailed 3D CFD studies. Optimized chord length, angle of attack, and airfoil positioning to maximize aerodynamic efficiency while improving flow behavior around the wheel wake region.
-Led composite manufacturing efforts by performing carbon fiber layups over foam cores for the airfoil structures and executing resin infusion manufacturing with Nomex honeycomb cores for the side panel assembly to achieve a lightweight, high-stiffness structure. Designed and integrated Aluminum 6061 support ribs to structurally connect the aerodynamic package to the vehicle side panel and chassis mounting points while maintaining manufacturability and structural integrity under race conditions." 
-
+          data-desc="Objective & Requirements
+Design aerodynamic wheel deflectors to reduce wheel wake losses and improve vehicle aerodynamic efficiency
+Maximize lift-to-drag performance while maintaining packaging and mounting constraints on a Formula SAE vehicle
+Ensure lightweight, manufacturable structures capable of withstanding race operating conditions
+Design & Analysis
+Conducted iterative aerodynamic optimization starting with 2D multi-airfoil cascade analysis to identify high lift-to-drag geometries
+Performed 3D CFD studies to refine flow behavior around wheel wake regions and validate aerodynamic performance improvements
+Optimized key parameters including airfoil chord length, angle of attack, and positioning relative to wheel geometry for maximum efficiency
+Iterated design based on airflow interaction between wheel wake and sidepod flow field
+Testing & Validation
+Evaluated aerodynamic performance improvements through CFD comparison across design iterations
+Verified flow attachment and wake reduction behavior in wheel region using 3D simulation results
+Iteratively refined geometry based on pressure distribution and velocity field visualization
+Specific Role
+Led aerodynamic design and optimization of wheel deflector system from concept to final configuration
+Performed 2D cascade analysis and 3D CFD-driven design iteration using aerodynamic performance metrics
+Designed and manufactured composite structures using carbon fiber layups over foam cores
+Executed resin infusion processes with Nomex honeycomb core side panels for lightweight stiffness optimization
+Designed and integrated Aluminum 6061 structural ribs to connect aerodynamic components to chassis mounting points
+Balanced aerodynamic performance with manufacturability and structural constraints under race conditions"
           data-tool="ANSYS Fluent, SolidWorks, Cadence CFD"
           data-outcome= "Helped increase lift to drag ratio to 2:1
 12% of total downforce (40 N)"
